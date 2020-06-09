@@ -1,68 +1,63 @@
-#to assign turns (board score layout)
-theBoard = {'7': ' ' , '8': ' ' , '9': ' ' ,'4': ' ' , '5': ' ' , '6': ' ' , '1': ' ' , '2': ' ' , '3': ' ' }
-#function to print tic tac toe board every time
-def printBoard(board):
-    print(board['7'] + '|' + board['8'] + '|' + board['9'])
-    print('-+-+-')
-    print(board['4'] + '|' + board['5'] + '|' + board['6'])
-    print('-+-+-')
-    print(board['1'] + '|' + board['2'] + '|' + board['3'])
-#function for main game
-def mainGame():
-    count=0
-    turn="X"
-    for i in range(10):   #10 times possibility in board
-        printBoard(theBoard)
-        print("Your Move ",turn," : " )
-        move=input()
-        theBoard[move]=turn
-        count=count+1
+theBoard=[" "," "," "," "," "," "," "," "," "]
+def PrintBoard(theBoard):
+    print("-"*13)
+    print("|",theBoard[6],"|",theBoard[7],"|",theBoard[8],"|")
+    print("-"*13)
+    print("|",theBoard[3],"|",theBoard[4],"|",theBoard[5],"|")
+    print("-"*13)
+    print("|",theBoard[0],"|",theBoard[1],"|",theBoard[2],"|")
+    print("-"*13)
 
-        #assign Board to next player
+def mainGame():
+    turn="X"
+    count=0
+    PrintBoard(theBoard)
+    for i in range(10):
+        #Get player move
+        print("Choose Your Place",turn," : ",end=" ")
+        while True:
+            try:
+                move=int(input())
+                break
+            except ValueError:
+                print("Only Enter Number : Try Again",end=" ")
+            except IndexError:
+                print("Only Enter Number between 1 to 9 (include 9) ",end=" ")
+        theBoard[move-1]=turn                      
+        PrintBoard(theBoard)
+        count=count+1
+        #assign board to next player
         if turn=="X":
             turn="O"
         else:
             turn="X"
-        
-        #Win Chances
+        #Check Win Chance
         if count>=5:
-            # row wise
-            if theBoard["1"]==theBoard["2"]==theBoard["3"] !=" ":
-                printBoard(theBoard)
-                print(theBoard["1"],"is won !")
+            if theBoard[0]==theBoard[1]==theBoard[2] != " ":
+                print(theBoard[0],"is Winner")
                 break
-            elif theBoard["4"]==theBoard["5"]==theBoard["6"]!=" ":
-                printBoard(theBoard)
-                print(theBoard["4"],"is won !")
+            elif theBoard[3]==theBoard[4]==theBoard[5] != " ":
+                print(theBoard[3],"is Winner")
                 break
-            elif theBoard["7"]==theBoard["8"]==theBoard["9"]!=" ":
-                printBoard(theBoard)
-                print(theBoard["7"],"is won !")
+            elif theBoard[6]==theBoard[7]==theBoard[8] != " ":
+                print(theBoard[6],"is Winner")
                 break
-            #column wise
-            elif theBoard["7"]==theBoard["4"]==theBoard["1"]!=" ":
-                printBoard(theBoard)
-                print(theBoard["7"],"is won !")
+            elif theBoard[6]==theBoard[3]==theBoard[0] != " ":
+                print(theBoard[3],"is Winner")
                 break
-            elif theBoard["8"]==theBoard["5"]==theBoard["2"]!=" ":
-                printBoard(theBoard)
-                print(theBoard["8"],"is won !")
+            elif theBoard[7]==theBoard[4]==theBoard[1] != " ":
+                print(theBoard[7],"is Winner")
                 break
-            elif theBoard["9"]==theBoard["6"]==theBoard["3"]!=" ":
-                printBoard(theBoard)
-                print(theBoard["9"],"is won !")
+            elif theBoard[8]==theBoard[2]==theBoard[5] != " ":
+                print(theBoard[8],"is Winner")
                 break
-            #diagonal wise
-            elif theBoard["7"]==theBoard["5"]==theBoard["3"]!=" ":
-                printBoard(theBoard)
-                print(theBoard["7"],"is won !")
+            elif theBoard[8]==theBoard[4]==theBoard[0] != " ":
+                print(theBoard[8],"is Winner")
                 break
-            elif theBoard["1"]==theBoard["5"]==theBoard["9"]!=" ":
-                printBoard(theBoard)
-                print(theBoard["1"],"is won !")
+            elif theBoard[6]==theBoard[4]==theBoard[2] != " ":
+                print(theBoard[6],"is Winner")
                 break
-        if count>9 :
-            printBoard(theBoard)
-            print("It is Draw")
+        if count==9 or count>9:
+            print("This is Draw ! !")
             break
 mainGame()
